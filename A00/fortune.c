@@ -8,6 +8,6 @@
 #include <stdio.h>
 
 int main() {
-  printf("Synarah Sitaf\n");
+  printf("Hey\n");
   return 0;
 }
