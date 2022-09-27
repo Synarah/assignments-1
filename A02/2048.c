@@ -18,13 +18,13 @@ int main() {
       if(matrix[l][k] == 0){
         max = max + extra;
       }
-      else if(matrix[l+1][k] == 0 && l <= 2){
-        if(matrix[l+2][k] == 0 && l <= 1){
-          if(matrix[l+3][k] == 0 && l == 0){
+      else if(l <= 2 && matrix[l+1][k] == 0){
+        if(l <= 1 && matrix[l+2][k] == 0){
+          if(l == 0 && matrix[l+3][k] == 0){
             max = max + extra;
           }
           else{
-            if(matrix[l+3][k] == matrix[l][k]){
+            if(l == 0 && matrix[l+3][k] == matrix[l][k]){
               cur = matrix[l+3][k] + matrix[l][k];
               if(cur > max){
                 max = cur;
@@ -33,7 +33,7 @@ int main() {
           }
         }
           else{
-            if(matrix[l+2][k] == matrix[l][k]){
+            if(l <= 1 && matrix[l+2][k] == matrix[l][k]){
               cur = matrix[l+2][k] + matrix[l][k];
               if(cur > max){
                 max = cur;
@@ -42,7 +42,7 @@ int main() {
           }
         }
         else{
-          if(matrix[l+1][k] == matrix[l][k]){
+          if(l <= 2 && matrix[l+1][k] == matrix[l][k]){
               cur = matrix[l+1][k] + matrix[l][k];
               if(cur > max){
                 max = cur;
@@ -57,13 +57,13 @@ int main() {
       if(matrix[y][x] == 0){
         max = max + extra;
       }
-      else if(matrix[y][x+1] == 0 && x <= 2){
-        if(matrix[y][x+2] == 0 && x <= 1){
-          if(matrix[y][x+3] == 0 && x == 0){
+      else if(x <= 2 && matrix[y][x+1] == 0){
+        if(x <= 1 && matrix[y][x+2] == 0){
+          if(x == 0 && matrix[y][x+3] == 0){
             max = max + extra;
           }
           else{
-            if(matrix[y][x+3] == matrix[y][x]){
+            if(x == 0 && matrix[y][x+3] == matrix[y][x]){
               cur = matrix[y][x+3] + matrix[y][x];
               if(cur > max){
                 max = cur;
@@ -72,7 +72,7 @@ int main() {
           }
         }
           else{
-            if(matrix[y][x+2] == matrix[y][x]){
+            if(x <= 1 && matrix[y][x+2] == matrix[y][x]){
               cur = matrix[y][x+2] + matrix[y][x];
               if(cur > max){
                 max = cur;
@@ -81,7 +81,7 @@ int main() {
           }
         }
         else{
-          if(matrix[y][x+1] == matrix[y][x]){
+          if(x <= 2 && matrix[y][x+1] == matrix[y][x]){
               cur = matrix[y][x+1] + matrix[y][x];
               if(cur > max){
                 max = cur;
