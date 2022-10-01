@@ -11,8 +11,8 @@ int main() {
   scanf(" %s", buff);
 
   int k = 0;
-  char* slow = malloc(sizeof(char) * 40);
-  for(int i = 0; i < sizeof(buff); i++){
+  char* slow = malloc(sizeof(char) * (strlen(buff)*pause + strlen(buff) + 1));
+  for(int i = 0; i < strlen(buff); i++){
     slow[k] = buff[i];
     k++;
     for(int j = 0; j < pause; j++){
@@ -20,6 +20,7 @@ int main() {
       k++;
     }
   }
+  slow[k] = '\0';
   printf(" %s", slow);
 
   free(slow);
