@@ -19,17 +19,15 @@ struct ppm_pixel* read_ppm(const char* filename, int* w, int* h) {
     //printf("Not a valid file");
     return NULL;
   }
-
+  fgets(str,1068,fp);
   fgets(str,1068,fp);
   sscanf(str, " %d %d", w,h);
-  struct ppm_pixel* arr = malloc(sizeof(struct ppm_pixel) * (*w)*(*h));
+  struct ppm_pixel* arr;
+  arr = malloc(sizeof(struct ppm_pixel) * (*w)*(*h));
+
+  fgets(str,1068,fp);
+  fread(arr,sizeof(struct ppm_pixel),(*w)*(*h),fp);
   
-  
-  for(int i = 0; i < *h; i++){
-    for(int j = 0; j < *w; j++){
-      fscanf(fp, " %hhu %hhu %hhu", &arr[i*(*h) + j].red,&arr[i*(*h) + j].green,&arr[i*(*h) + j].blue);
-    }
-  }
   fclose(fp); 
   return(arr);
 }
