@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
   printf("Reading %s: with width %d and height %d \n", file,w,h);
   for(int i = 0; i < h; i++){
     for(int j = 0; j < w; j++){
-      struct ppm_pixel a = ppm_array[i*h + j];
+      struct ppm_pixel a = ppm_array[i*w + j];
       r = (int)a.red;
       g = (int)a.green;
       b = (int)a.blue;
