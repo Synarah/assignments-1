@@ -6,11 +6,11 @@
 
 int main(int argc, char** argv) {
   int w, h;
-  char* filename = "feep-raw.ppm";
+  const char* filename = "feep-raw.ppm";
   struct ppm_pixel* pixels = read_ppm(filename, &w, &h);
   write_ppm("feep-raw-test.ppm", pixels, w, h);
 
-  free(pixels);
+  //free(pixels);
   pixels = read_ppm("feep-raw-test.ppm", &w, &h);
 
   printf("Testing file %s: %d %d\n", filename, w, h); 
