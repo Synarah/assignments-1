@@ -26,6 +26,12 @@ struct node* insert_front(struct restaurant rest, struct node* head) {
   return n;
 }
 
+  void print(struct node* list) {
+    for (struct node* n = list; n != NULL; n = n->next) {
+      printf(" %d) %s        open: %d:00  close: %d:00  stars: %.1f \n", n->rest.num, n->rest.name, n->rest.open, n->rest.close, n->rest.rate);
+    }
+  }
+
 int main() {
   struct node *head = NULL;
   printf("Enter a number of returants: ");
@@ -46,10 +52,6 @@ int main() {
     
   }
 
-  void print(struct node* list) {
-    for (struct node* n = list; n != NULL; n = n->next) {
-      printf(" %d) %s        open: %d:00  close: %d:00  stars: %.1f \n", rest.num, rest.name, rest.open, rest.close, rest.rate);
-    }
-  }
+
   return 0;
 }
