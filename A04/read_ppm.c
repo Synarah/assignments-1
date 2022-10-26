@@ -20,7 +20,9 @@ struct ppm_pixel* read_ppm(const char* filename, int* w, int* h) {
     return NULL;
   }
   fgets(str,1068,fp);
-  fgets(str,1068,fp);
+  while(str[0] == '#'){
+    fgets(str,1068,fp);
+  }
   sscanf(str, " %d %d", w,h);
   struct ppm_pixel* arr;
   arr = malloc(sizeof(struct ppm_pixel) * (*w)*(*h));
