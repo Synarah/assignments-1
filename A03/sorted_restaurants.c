@@ -15,6 +15,12 @@ struct node {
   struct node* next;
 };
 
+ void print(struct node* list) {
+    for (struct node* n = list; n != NULL; n = n->next) {
+      printf(" %d) %s        open: %d:00  close: %d:00  stars: %.1f \n", rest.num, rest.name, rest.open, rest.close, rest.rate);
+    }
+  }
+
 struct node* insert_front(struct restaurant rest, struct node* head) {
   struct node* n = malloc(sizeof(struct node));
   if (n == NULL) {
@@ -45,11 +51,6 @@ int main() {
     head = insert_front(rest, head);
     
   }
-
-  void print(struct node* list) {
-    for (struct node* n = list; n != NULL; n = n->next) {
-      printf(" %d) %s        open: %d:00  close: %d:00  stars: %.1f \n", rest.num, rest.name, rest.open, rest.close, rest.rate);
-    }
-  }
+  
   return 0;
 }
