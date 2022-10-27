@@ -18,26 +18,43 @@ int main(int argc, char** argv) {
 
   int size = w*h*3;
   int* lsb = malloc(sizeof(int) *size);
+  size = 0;
   for(int i = 0; i < h; i++){
     for(int j = 0; j < w; j++){
       struct ppm_pixel p = pixels[i*w + j];
-      lsb[i*w + j] = (int)p.red%2;
-      lsb[i*w + j + 1] = (int)p.green%2;
-      lsb[i*w + j + 2] = (int)p.blue%2;
+      lsb[size] = p.red%2;
+      //printf("%d", lsb[size]);
+      size++;
+      lsb[size] = p.green%2;
+      //printf("%d", lsb[size]);
+      size++;
+      lsb[size] = p.blue%2;
+      //printf("%d", lsb[size]);
+      size++;
     }
   }
 
   size = (w*h*3)/8;
-  printf("Max number of characters in the image: %d", size);
+  printf("Max number of characters in the image: %d\n", size);
   int* c = malloc(sizeof(int) *size);
-  size = 0;
+  int count = 0;
   for(int i = 0; i < h*w*3; i = i+8){
-    c[size] = ((2*2*2*2*2*2*2)*(lsb[i])) + ((2*2*2*2*2*2)*(lsb[i+1])) + ((2*2*2*2*2)*(lsb[i+2])) + ((2*2*2*2)*(lsb[i+3])) + ((2*2*2)*(lsb[i+4])) + ((2*2)*(lsb[i+5])) + ((2)*(lsb[i+6])) + ((1)*(lsb[i+7]));
-    printf("%c", (char) c[size]);
-    size++;
+    c[count] = ((2*2*2*2*2*2*2)*(lsb[i])) + ((2*2*2*2*2*2)*(lsb[i+1])) + ((2*2*2*2*2)*(lsb[i+2])) + ((2*2*2*2)*(lsb[i+3])) + ((2*2*2)*(lsb[i+4])) + ((2*2)*(lsb[i+5])) + ((2)*(lsb[i+6])) + ((1)*(lsb[i+7]));
+    if(c[count] == 0){
+      break;
+    }
+    else{
+      //printf("%d", lsb[i]);
+      //printf("%d", c[count]);
+      printf("%c", (char) c[count]);
+      count++;
+    }
+    
   }
-
-  
+  printf("\n");
+  free(pixels);
+  free(lsb);
+  free(c);
 
   return 0;
 }

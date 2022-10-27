@@ -19,6 +19,7 @@ int main(int argc, char** argv) {
   }
   printf("Reading file %s with width %d and height %d\n", filename, w, h);
 
+  
 
   return 0;
 }
