@@ -76,7 +76,7 @@ int main(int argc, char** argv) {
           bombs++;
         }
       }
-      else if(j == 0 && i != 0){
+      else if(j == 0 && i < m-1){
         if(mine[(i-1)*n + j] == 'X'){
           bombs++;
         }
@@ -94,10 +94,10 @@ int main(int argc, char** argv) {
         }
       }
       else if(j == 0 && i == m-1){
-        if(mine[(i+1)*n + j] == 'X'){
+        if(mine[(i-1)*n + j] == 'X'){
           bombs++;
         }
-        if(mine[(i+1)*n + j + 1] == 'X'){
+        if(mine[(i-1)*n + j + 1] == 'X'){
           bombs++;
         }
         if(mine[(i)*n + j + 1] == 'X'){
@@ -121,14 +121,31 @@ int main(int argc, char** argv) {
           bombs++;
         }
       }
-      else if(i == m-1 && j == n){
+      else if(i == m-1 && j == n-1){
+        if(mine[(i-1)*n + j - 1] == 'X'){
+          bombs++;
+        }
+        if(mine[(i-1)*n + j] == 'X'){
+          bombs++;
+        }
+        if(mine[(i)*n + j - 1] == 'X'){
+          bombs++;
+        }
+      }
+      else if(i < m-1 && j == n-1){
+        if(mine[(i-1)*n + j] == 'X'){
+          bombs++;
+        }
+        if(mine[(i-1)*n + j - 1] == 'X'){
+          bombs++;
+        }
+        if(mine[(i)*n + j - 1] == 'X'){
+          bombs++;
+        }
         if(mine[(i+1)*n + j - 1] == 'X'){
           bombs++;
         }
         if(mine[(i+1)*n + j] == 'X'){
-          bombs++;
-        }
-        if(mine[(i)*n + j - 1] == 'X'){
           bombs++;
         }
       }
