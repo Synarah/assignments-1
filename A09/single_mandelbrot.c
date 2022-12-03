@@ -29,10 +29,63 @@ int main(int argc, char* argv[]) {
   printf("  X range = [%.4f,%.4f]\n", xmin, xmax);
   printf("  Y range = [%.4f,%.4f]\n", ymin, ymax);
 
-  // todo: your work here
-  // generate pallet
+
   srand(time(0));
 
-  // compute image
+  struct ppm_pixel *pal = malloc(sizeof(struct ppm_pixel) * maxIterations);
+  for(int i = 0; i < maxIterations; i++){
+    pal[i].red = rand() % 255;
+    pal[i].green = rand() % 255;
+    pal[i].blue = rand() % 255;
+  }
+
+  struct ppm_pixel *pix = malloc(sizeof(struct ppm_pixel) * size * size);
+
+  double t; 
+  struct timeval tstart, tend;
+  gettimeofday(&tstart, NULL);
+
+  for(int i= 0; i<size; i++){
+    for(int j=0; j<size; j++){
+      float xfrac = ((float) j)/size;
+      float yfrac = ((float) i)/size;
+      float x0 = xmin + xfrac * (xmax - xmin);
+      float y0 = ymin + yfrac * (ymax - ymin);
+    
+      float x = 0.0;
+      float y = 0.0;
+      int iter = 0;
+      while (iter < maxIterations && x*x + y*y < 2*2){
+        float xtmp = x*x - y*y + x0;
+        y = 2*x*y + y0;
+        x = xtmp;
+        iter++;
+      }
+      if(iter < maxIterations){
+        pix[i * size + j] = pal[iter];
+      }
+      else{
+        pix[i * size + j].red = 0;
+        pix[i * size + j].green = 0;
+        pix[i * size + j].blue = 0;
+      }
+    }
+  }
+
+  gettimeofday(&tend, NULL);
+
+  t = tend.tv_sec - tstart.tv_sec + (tend.tv_usec-tstart.tv_usec)/1.e6;
+  int timestamp = time(0);
+
+  printf("Computed mandelbrot set (%dx%d) in %f seconds\n", size, size,t);
+
+  char fp[100];
+  sprintf(fp, "mandelbrot-%d-%d.ppm", size, timestamp);
+  printf("Writing file: %s\n", fp);
+  write_ppm(fp, pix, size, size);
+
+  free(pix);
+  free(pal);
+  
 
 }
